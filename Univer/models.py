@@ -1,39 +1,26 @@
 from django.db import models
 
-class Kurs(models.Model):
-    title = models.CharField(max_length=30)
-    start = models.TimeField(blank=True)
-    stop = models.TimeField(blank=True)
-    totalStudent = models.IntegerField(default=0)
 
-    discription = models.CharField(max_length=255,blank=True)
-    create_ed = models.DateTimeField(auto_now_add=True)
-    update_ed = models.DateTimeField(auto_now=True)
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
-
-    class Meta:
-        verbose_name = "KURS"
-        verbose_name_plural = "Kurslar"
-        ordering = ['-create_ed']
+class Categories(models.Model):
+    title = models.CharField(max_length=50)
 
     def __str__(self):
         return self.title
 
-class Student(models.Model):
-    fullname = models.CharField(max_length=40)
-    phone = models.CharField(max_length=20)
-    email = models.CharField(max_length=50,blank=True)
-    kurs = models.ForeignKey(Kurs, on_delete=models.CASCADE)
-    create_ed = models.DateTimeField(auto_now_add=True)
-    update_ed = models.DateTimeField(auto_now=True)
+
+class News(models.Model):
+    title = models.CharField(max_length=50, verbose_name='news')
+    context = models.TextField(blank=True)
+    created_ed = models.DateTimeField(auto_now_add=True)
+    updated_ed = models.DateTimeField(auto_now=True)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
-
-
-    class Meta:
-        verbose_name = "Talaba"
-        verbose_name_plural = "Talabalar"
-        ordering = ['-create_ed']
+    is_bool = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.fullname
+        return self.title
 
+    class Meta:
+        verbose_name = "NEW"
+        verbose_name_plural = "NEWS"
+        ordering = ['-created_ed']

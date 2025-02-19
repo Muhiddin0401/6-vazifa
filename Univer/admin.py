@@ -1,15 +1,14 @@
 from django.contrib import admin
-from .models import Kurs,Student
+from .models import *
 
-class KursAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'start', 'stop','totalStudent', 'create_ed','update_ed')
+class categoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title',)
     search_fields = ('title',)
-    list_filter = ('start','stop')
 
-class StudentAdmin(admin.ModelAdmin):
-    list_display = ('id', 'fullname', 'phone', 'kurs', 'create_ed')
-    search_fields = ('fullname', 'kurs__title')
-    list_filter = ('kurs',)
+class newsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'created_ed', 'category', 'is_bool')
+    search_fields = ('title',)
+    list_filter = ('category',)
 
-admin.site.register(Kurs,KursAdmin)
-admin.site.register(Student,StudentAdmin)
+admin.site.register(Categories,categoryAdmin)
+admin.site.register(News,newsAdmin)

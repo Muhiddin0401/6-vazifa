@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from .models import Kurs, Student  # Modelni import qilamiz
+from .models import Categories, News
 
 
-def salon(request):
-    courses = Kurs.objects.all()  # Barcha kurslarni olish
-    students = Student.objects.all()  # Barcha talabalarni olish
+def index(request):
+    category = Categories.objects.all()
+    news = News.objects.all()
 
-    return render(request, 'news/salon.html', {'courses': courses, 'students': students})
+    return render(request, 'news/index.html', {'category': category, 'news': news})
