@@ -5,9 +5,11 @@ class Kurs(models.Model):
     start = models.TimeField(blank=True)
     stop = models.TimeField(blank=True)
     totalStudent = models.IntegerField(default=0)
+
     discription = models.CharField(max_length=255,blank=True)
     create_ed = models.DateTimeField(auto_now_add=True)
     update_ed = models.DateTimeField(auto_now=True)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
 
     class Meta:
         verbose_name = "KURS"
@@ -24,6 +26,8 @@ class Student(models.Model):
     kurs = models.ForeignKey(Kurs, on_delete=models.CASCADE)
     create_ed = models.DateTimeField(auto_now_add=True)
     update_ed = models.DateTimeField(auto_now=True)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+
 
     class Meta:
         verbose_name = "Talaba"
