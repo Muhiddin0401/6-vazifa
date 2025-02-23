@@ -1,14 +1,16 @@
 from django.contrib import admin
 from .models import *
 
-class categoryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title',)
+class KompaniyaAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title','birth_date','created_ed','updated_ed',)
     search_fields = ('title',)
+    list_display_links = ('title',)
 
-class newsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'created_ed', 'category', 'is_bool')
+class AvtomabilAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'color', 'kuchi', 'kompaniya')
     search_fields = ('title',)
-    list_filter = ('category',)
+    list_filter = ('kompaniya',)
+    list_display_links = ('title',)
 
-admin.site.register(Categories,categoryAdmin)
-admin.site.register(News,newsAdmin)
+admin.site.register(Kompaniya,KompaniyaAdmin)
+admin.site.register(Avtomabil,AvtomabilAdmin)

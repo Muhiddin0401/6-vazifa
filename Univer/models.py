@@ -1,26 +1,37 @@
 from django.db import models
 
 
-class Categories(models.Model):
+class Kompaniya(models.Model):
     title = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.title
-
-
-class News(models.Model):
-    title = models.CharField(max_length=50, verbose_name='news')
-    context = models.TextField(blank=True)
+    birth_date = models.DateTimeField(auto_now=True)
     created_ed = models.DateTimeField(auto_now_add=True)
     updated_ed = models.DateTimeField(auto_now=True)
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
-    is_bool = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = "NEW"
-        verbose_name_plural = "NEWS"
+        verbose_name = "KOMPANIYA"
+        verbose_name_plural = "KOMPANIYALAR"
+        ordering = ['-created_ed']
+
+
+class Avtomabil(models.Model):
+    title = models.CharField(max_length=50, verbose_name='model')
+    color = models.CharField(max_length=50)
+    kuchi = models.CharField(max_length=50)
+    year = models.CharField(max_length=50)
+    price = models.CharField(max_length=50)
+    context = models.TextField(blank=True)
+    kompaniya = models.ForeignKey(Kompaniya, on_delete=models.CASCADE)
+    created_ed = models.DateTimeField(auto_now_add=True)
+    updated_ed = models.DateTimeField(auto_now=True)
+    photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "AVTOMABIL"
+        verbose_name_plural = "AVTOMABILLAR"
         ordering = ['-created_ed']
