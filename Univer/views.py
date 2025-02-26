@@ -11,7 +11,7 @@ def index(request):
 
 def komp_avto(request, kompaniya_id):
     kompaniya = get_object_or_404(Kompaniya, pk=kompaniya_id)  # Tanlangan kompaniya
-    avtomabil = Avtomabil.objects.filter(kompaniya=kompaniya)  # Shu kompaniyaga tegishli avtomabillar
+    avtomabil = Avtomabil.objects.filter(id=kompaniya)  # Shu kompaniyaga tegishli avtomabillar
     barcha_kompaniyalar = Kompaniya.objects.all()  # 🔥 Kompaniyalar ro‘yxatini olish
 
     context = {
